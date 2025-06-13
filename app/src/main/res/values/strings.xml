@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Assesmobpro3</string>
+    <string name="app_name">Blushly.id</string>
+    <string name="gambar">Gambar%1$s</string>
+    <string name="error">Gagal memuat data.. Koneksi error</string>
+    <string name="try_again">Coba lagi</string>
+    <string name="profil">Profil</string>
+    <string name="tutup">Tutup</string>
+    <string name="logout">Logout</string>
+    <string name="tambah_pelanggan">Tambah pelanggan</string>
+    <string name="nama_pelanggan">Nama pelanggan</string>
+    <string name="variant">Variant </string>
+    <string name="warna">Warna </string>
+    <string name="batal">Batal</string>
+    <string name="simpan">Simpan</string>
+    <string name="hapus">Hapus</string>
+    <string name="pesan_hapus">Hapus pelanggan ini?</string>
+    <string name="tombol_hapus">Hapus</string>
+    <string name="tombol_batal">Batal</string>
 </resources>
