@@ -32,7 +32,8 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             status.value = ApiStatus.LOADING
             try {
-                data.value = PelangganApi.service.getPelanggan(userId)
+                val response = PelangganApi.service.getPelanggan(userId)
+                data.value = response.data
                 status.value = ApiStatus.SUCCESS
             } catch (e: Exception) {
                 Log.d("MainViewModel", "FailureL ${e.message}")
@@ -71,11 +72,11 @@ class MainViewModel : ViewModel() {
             "image/jpg".toMediaTypeOrNull(), 0, byteArray.size
         )
         return MultipartBody.Part.createFormData(
-            "image", "image.jpg", requestBody
+            "gambar", "image.jpg", requestBody
         )
     }
 
-    fun deletePelanggan(userId: String, id: String) {
+    fun deletePelanggan(userId: String, id: Int) {
         viewModelScope.launch {
             try {
                 val result = PelangganApi.service.deletePelanggan(

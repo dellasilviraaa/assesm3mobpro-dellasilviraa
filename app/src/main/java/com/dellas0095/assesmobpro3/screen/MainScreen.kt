@@ -249,10 +249,10 @@ fun ListItem(pelanggan: Pelanggan, onDeleteClick: () -> Unit = {}) {
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(PelangganApi.getPelangganUrl(pelanggan.imageId))
+                .data(PelangganApi.getPelangganUrl(pelanggan.imagepath))
                 .crossfade(true)
                 .build(),
-            contentDescription = stringResource(R.string.gambar, pelanggan.namaPelanggan),
+            contentDescription = stringResource(R.string.gambar, pelanggan.nama_pelanggan),
             contentScale = ContentScale.Crop,
             placeholder = painterResource(id = R.drawable.loading_img),
             error = painterResource(id = R.drawable.baseline_broken_image_24),
@@ -270,12 +270,12 @@ fun ListItem(pelanggan: Pelanggan, onDeleteClick: () -> Unit = {}) {
                 Column (
                 ) {
                     Text(
-                        text = pelanggan.namaPelanggan,
+                        text = pelanggan.nama_pelanggan,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
                     )
                     Text(
-                        text = pelanggan.variant,
+                        text = pelanggan.varian,
                         fontSize = 14.sp,
                         color = Color.White
                     )
@@ -285,15 +285,12 @@ fun ListItem(pelanggan: Pelanggan, onDeleteClick: () -> Unit = {}) {
                         color = Color.White
                     )
                 }
-                if (pelanggan.mine == "1") {
-                    IconButton(onClick = { onDeleteClick() }) {
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            contentDescription = stringResource(id = R.string.hapus)
-                        )
-                    }
+                IconButton(onClick = { onDeleteClick() }) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = stringResource(id = R.string.hapus)
+                    )
                 }
-
             }
         }
     }

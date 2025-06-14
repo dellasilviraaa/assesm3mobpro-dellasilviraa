@@ -2,8 +2,10 @@ package com.dellas0095.assesmobpro3.network
 
 
 import android.media.Image
+import com.dellas0095.assesmobpro3.model.GeneralApiResponse
 import com.dellas0095.assesmobpro3.model.Pelanggan
 import com.dellas0095.assesmobpro3.model.OpStatus
+import com.dellas0095.assesmobpro3.model.PelangganResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.MultipartBody
@@ -30,26 +32,36 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface PelangganApiService {
-    @GET("pelanggan.php")
+    @GET("api.php")
     suspend fun getPelanggan(
         @Header("Authorization") userId: String
-    ): List<Pelanggan>
+    ): PelangganResponse
 
     @Multipart
-    @POST("pelanggan.php")
+    @POST("api.php")
     suspend fun postPelanggan(
         @Header("Authorization") userId: String,
-        @Part("nama") nama: RequestBody,
-        @Part("variant") variant: RequestBody,
+        @Part("nama_pelanggan") namaPelanggan: RequestBody,
+        @Part("varian") varian: RequestBody,
         @Part("warna") warna: RequestBody,
-        @Part image: MultipartBody.Part
-    ): OpStatus
+        @Part gambar: MultipartBody.Part
+    ): GeneralApiResponse
 
-    @DELETE("pelanggan.php")
+    @Multipart
+    @POST("api.php")
+    suspend fun updateBuah(
+        @Header("Authorization") userEmail: String,
+        @Query("nama_pelanggan") imageId : Int,
+        @Part("varian") varian: RequestBody,
+        @Part("warna") warna: RequestBody
+    ): GeneralApiResponse
+
+
+    @DELETE("api.php")
     suspend fun deletePelanggan(
         @Header("Authorization") userId: String,
-        @Query("id") id: String
-    ): OpStatus
+        @Query("id") id: Int
+    ): GeneralApiResponse
 }
 
 object PelangganApi {
@@ -58,7 +70,7 @@ object PelangganApi {
     }
 
     fun getPelangganUrl(imageId: String): String {
-        return "${BASE_URL}image.php?id=$imageId"
+        return BASE_URL + imageId
     }
 }
 
